@@ -24,7 +24,26 @@ namespace GroceryTests
             var actual = item.Price;
             
             Assert.AreEqual(expected, actual);
-        
+        }
+
+        [Test]
+        public void Price_WhenCalled_ReturnsValueFromPricer()
+        {
+            var expected = 1.23;
+            IPricer fakePricer = new FakePricer(expected);
+            var actual = fakePricer.Price;
+            
+            Assert.AreEqual(expected, actual);
+        }
+
+        private class FakePricer : IPricer
+        {
+            public FakePricer(double price)
+            {
+                Price = price;
+            }
+
+            public double Price { get; private set; }
         }
     }
 }
